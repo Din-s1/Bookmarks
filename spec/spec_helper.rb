@@ -1,7 +1,7 @@
 ENV['RACK_ENV'] = 'test'
-
+ENV['CONDITION'] = 'test'
 require_relative '../lib/app.rb'
-
+require_relative './empty_table_helper.rb'
 require 'capybara'
 require 'capybara/rspec'
 require 'pg'
@@ -23,6 +23,10 @@ Capybara.app = BookmarkManager
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+
+  config.before(:each) do
+    empty_table_helper
+  end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
