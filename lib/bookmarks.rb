@@ -13,5 +13,14 @@ class Bookmarks
       row['url']
     end
   end
-  
+
+  def self.add(link)
+    if ENV['CONDITION'] = 'test'
+      conn = PG.connect( dbname: 'bookmark_manager_test' )
+    else
+      conn = PG.connect( dbname: 'bookmark_manager' )
+    end  
+    conn.exec( "INSERT INTO bookmarks (url) VALUES ('#{link}')" )
+  end
+
 end
